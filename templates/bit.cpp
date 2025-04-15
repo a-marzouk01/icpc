@@ -57,3 +57,4 @@ int LOG2(int x) { //floor(log2(x))
 int LOG2(long long x) { //floor(log2(x))
     return 63 - __builtin_clzll(x);
 }
+
