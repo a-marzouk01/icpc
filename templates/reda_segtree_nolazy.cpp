@@ -1,3 +1,4 @@
+// credit: https://github.com/cgmoreda/CP-Reference
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -55,8 +56,8 @@ class segment_tree {
             tree[idx] += val;
             return;
         }
-        update(lchild, from, to, val);
-        update(rchild, from, to, val);
+        update(lchild, val);
+        update(rchild, val);
         pushup(idx);
     }
 public:

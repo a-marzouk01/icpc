@@ -26,6 +26,22 @@ struct FenwickTree {
     T rangeQuery(ll l, ll r) {
         return query(r) - query(l - 1);
     }
+
+    ll lower_bound(T value) const {
+        ll idx = 0;
+
+        ll bitMask = 1;
+        while ((bitMask << 1) <= n) bitMask <<= 1;
+        
+        for (; bitMask > 0; bitMask >>= 1) {
+            ll next = idx + bitMask;
+            if (next <= n && fenw[next] < value) {
+                value -= fenw[next];
+                idx = next;
+            }
+        }
+        return idx + 1;
+    }
 };
 
 int main() {

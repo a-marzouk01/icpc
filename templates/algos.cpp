@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+
+typedef long long ll; 
 using namespace std;
 
 /* merging intervals */
@@ -41,4 +43,14 @@ ll largest_sum_subarray(vector<ll>v) {
     return max_sum;
 }
 
+/* just a good sqrt func */
+ll sqrtt(ll t) {
+    ll y = sqrt((ld)t);
+    if (((y+1)*(y+1) ) <= t) {
+        y++;
+    } else if ((y*y) > t) {
+        y--;
+    }
+    return y;
+}
 
