@@ -1,23 +1,7 @@
 #include "ext/pb_ds/tag_and_trait.hpp"
-#include <algorithm>
-#include <array>
 #include <bits/stdc++.h>
-#include <bitset>
-#include <cassert>
-#include <climits>
-#include <cmath>
-#include <cstdlib>
-#include <cstring>
-#include <deque>
 #include <ext/pb_ds/assoc_container.hpp> 
 #include <ext/pb_ds/tree_policy.hpp>
-#include <functional>
-#include <iterator>
-#include <queue>
-#include <set>
-#include <string>
-#include <unordered_map>
-#include <vector>
 
 using namespace std;
 using namespace __gnu_pbds;
@@ -67,23 +51,6 @@ ll b[limit_size];
 ll c[limit_size];
 
 void solve() {
-    cin >> n;
-    
-    vector<pair<ll, ll>> arr;
-    for (ll i = 0; i < n; i++) {
-        cin >> x >> y;
-        arr.emplace_back(x, y);
-    }
-    arr.emplace_back(0, 0);
-
-    ll num = 0;
-    for (ll i = 0; i < n; i++) {
-        while (!(num % arr[i+1].second == arr[i+1].first)) {
-            num += arr[i].first;
-        }
-    }
-
-    cout << num << endl;
 }
 
 int main() {
