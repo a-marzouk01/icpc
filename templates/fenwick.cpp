@@ -27,7 +27,7 @@ struct FenwickTree {
         return query(r) - query(l - 1);
     }
 
-    ll lower_bound(T value) const {
+    ll lower_bound(T value) const { // first index with prefix sum >= value
         ll idx = 0;
 
         ll bitMask = 1;

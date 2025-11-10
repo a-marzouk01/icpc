@@ -6,7 +6,7 @@ using namespace std;
 typedef long long ll;
 
 template<typename T>
-class LazySegTree {
+class segment_tree {
 #define LEFT  (idx<<1)
 #define RIGHT (idx<<1|1)
 #define MID   ((start+end)>>1)
@@ -14,7 +14,6 @@ class LazySegTree {
 	int n;
 	vector<T> tree, lazy;
 
-	// 1) MERGE: combine two child values
 	T merge(const T &L, const T &R) {
     	// <-- adapt here -->
     	return L + R;  // default: range-sum
@@ -23,7 +22,6 @@ class LazySegTree {
     	// return __gcd(L, R);  // range-gcd
 	}
 
-	// 2) PUSHDOWN: apply and propagate a pending update
 	inline void pushdown(int idx, int start, int end) {
     	if (!lazy[idx]) return;
 
@@ -99,8 +97,8 @@ class LazySegTree {
 	}
 
 public:
-	LazySegTree(int _n) : n(_n), tree(4*_n,0), lazy(4*_n,0) {}
-	LazySegTree(const vector<T> &v) {
+	segment_tree(int _n) : n(_n), tree(4*_n,0), lazy(4*_n,0) {}
+	segment_tree(const vector<T> &v) {
     	n = (int)v.size()-1;
     	tree.assign(4*n,0);
     	lazy.assign(4*n,0);
@@ -108,7 +106,7 @@ public:
 	}
 
 	void update(int l, int r, const T &val) { update(1,1,n,l,r,val); }
-	T query(int l, int r)      	{ return query(1,1,n,l,r); }
+	T query(int l, int r) { return query(1,1,n,l,r); }
 
 #undef LEFT
 #undef RIGHT
@@ -118,22 +116,15 @@ public:
 
 
 int main() {
-    // Create a 1-indexed array for the segment tree.
-    // For instance, if we want to represent the array: [1, 2, 3, 4, 5]
-    // we define it as:
-    vector<ll> arr = {0, 1, 2, 3, 4, 5};  // arr[0] is unused
+    vector<ll> arr = {0, 1, 2, 3, 4, 5}; // must be 1-indexed
 
-    // Instantiate the segment tree with the array.
     segment_tree<ll> seg(arr);
 
-    // Example query: Sum of elements from index 2 to 4.
-    cout << "Initial sum of indices 2 to 4: " << seg.query(2, 4) << "\n";  // Should output 2+3+4 = 9
+    cout << "Initial sum of indices 2 to 4: " << seg.query(2, 4) << "\n";
 
-    // Example update: Add 10 to elements from index 3 to 5.
     seg.update(3, 5, 10);
 
-    // Query again after the update.
-    cout << "Sum of indices 2 to 4 after update: " << seg.query(2, 4) << "\n";  // Should output 2 + (3+10) + (4+10) = 29
+    cout << "Sum of indices 2 to 4 after update: " << seg.query(2, 4) << "\n";
 
     return 0;
 }

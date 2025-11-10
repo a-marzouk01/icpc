@@ -13,41 +13,37 @@ using ordered_set = tree<num_t, null_type, less<num_t>, rb_tree_tag, tree_order_
 template <typename num_t>
 struct ordered_multiset {
 	ordered_set<pair<num_t, ll> > vals;
-	set<pair<num_t, ll> > best; /* start at -1 */
+	set<pair<num_t, ll> > best;
 	
-	/* helper, find the lowest value that represents the element */
 	ll findbest(num_t val) {
 		return (*best.upper_bound(make_pair(val - 1, 0))).second;
 	}
 	
-	/* is element in set */
 	bool contains(num_t val) {
 		return vals.find(make_pair(val, -1)) != vals.end();
 	}
 	
 	void insert(num_t val) {
-		if (contains(val)) { /* already in, update lowest value and insert a new one */
+		if (contains(val)) {
 			ll loc = findbest(val);
 			best.erase(make_pair(val, loc));
 			best.insert(make_pair(val, loc - 1));
 			vals.insert(make_pair(val, loc - 1));
-		} else { /* make lowest value -1 and insert it */
+		} else {
 			best.insert(make_pair(val, -1));
 			vals.insert(make_pair(val, -1));
 		}
 	}
 	
-	void erase(num_t val) { /* erases one */
-		if (!contains(val)) return; /* not in */
+	void erase(num_t val) {
+		if (!contains(val)) return;
 		num_t loc = findbest(val);
 		
-		/* remove the element and its best */
 		best.erase(make_pair(val, loc));
 		vals.erase(make_pair(val, loc));
-		if (loc != -1) best.insert(make_pair(val, loc + 1)); /* more elements in set, update best */
+		if (loc != -1) best.insert(make_pair(val, loc + 1));
 	}
 	
-	/* unmodified functions */
 	num_t find_by_order(ll k) { return (*vals.find_by_order(k)).first; }
 	ll order_of_key(num_t k) { return vals.order_of_key(make_pair(k - 1, 0)); }
 	auto begin() { return vals.begin(); }
