@@ -39,20 +39,6 @@ class segment_tree {
     	// 	lazy[RIGHT] = lazy[idx];
     	// }
 
-    	/*** Range-Min-Assign (chmin) ***/
-    	// tree[idx] = min(tree[idx], lazy[idx]);
-    	// if (start != end) {
-    	// 	lazy[LEFT]  = (lazy[LEFT] ? min(lazy[LEFT], lazy[idx]) : lazy[idx]);
-    	// 	lazy[RIGHT] = (lazy[RIGHT] ? min(lazy[RIGHT], lazy[idx]) : lazy[idx]);
-    	// }
-
-    	/*** Range-Max-Assign (chmax) ***/
-    	// tree[idx] = max(tree[idx], lazy[idx]);
-    	// if (start != end) {
-    	// 	lazy[LEFT]  = (lazy[LEFT] ? max(lazy[LEFT], lazy[idx]) : lazy[idx]);
-    	// 	lazy[RIGHT] = (lazy[RIGHT] ? max(lazy[RIGHT], lazy[idx]) : lazy[idx]);
-    	// }
-
     	// After applying, clear tag for range-add/assign
     	lazy[idx] = 0;
 	}
