@@ -18,7 +18,6 @@ vector<pair<int, int>> merge_intervals(vector<pair<int, int>>v) {
     return merged;
 }
 
-/* monotonic stacK */
 int n;
 vector<int> v(n);
 stack<int>st;
