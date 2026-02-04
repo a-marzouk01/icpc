@@ -16,9 +16,10 @@ void solve() {
 int main() {
     ios_base::sync_with_stdio(false), cin.tie(nullptr);
 
-    int ts = 1;
+    int ts = 1; 
     // std::cin >> ts;
     for (int t = 1; t <= ts; t++) {
         solve();
     }
 }
+

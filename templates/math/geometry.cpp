@@ -46,6 +46,7 @@ bool collinear(const P& he, const P& she) {
     return he * she == 0;
 }
 
+
 ll dot(const P &a, const P &b) {
     return a.x * b.x + a.y * b.y;
 }

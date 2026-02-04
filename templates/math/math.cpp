@@ -7,59 +7,51 @@ const ll MOD = 1e9 + 7;
 
 using namespace std;
 
-// returns the gcd of a and b
 ll gcd(ll a, ll b) {
     return b == 0 ? a : gcd(b, a % b);
 }
 
-// returns the lcm of a and b
 ll lcm(ll a, ll b) {
     return a / __gcd(a, b) * b;
 }
 
-// returns the ceil of n/x
 int ceil(int n, int x) {
     return (n + x - 1)/x;
 }
 
-// a function for fast power, calculates bast to the power of exp mod by mod swiftly
-ll modExp(ll base, ll exp, ll mod) {
+ll power(ll base, ll exp, ll mod) {
     ll result = 1;
-    base %= mod;
     while(exp > 0) {
-        if(exp & 1)
-            result = (result * base) % mod;
+        if(exp & 1) result = (result * base) % mod;
         base = (base * base) % mod;
         exp >>= 1;
     }
     return result;
 }
 
-// a function that returns the inverse of a aka a^-1, note that mod must not be a multiple of a
-ll modInv(ll a, ll mod) {
-    return modExp(a, mod - 2, mod);
+ll ipower(ll a, ll mod) {
+    return power(a, mod - 2, mod);
 }
 
 vector<ll> fact(MAX), invFact(MAX);
 
-// precompute the factorials with their inverses
 void precompute() {
     fact[0] = 1;
     for (ll i = 1; i < MAX; i++)
         fact[i] = (fact[i-1] * i) % MOD;
     
-    invFact[MAX - 1] = modInv(fact[MAX - 1], MOD);
+    invFact[MAX - 1] = ipower(fact[MAX - 1], MOD);
     for (ll i = MAX - 2; i >= 0; i--)
         invFact[i] = (invFact[i + 1] * (i + 1)) % MOD;
 }
 
-// calculates n choose k (how many ways we can get k from n)
+// (how many ways we can get k from n)
 ll nCk(ll n, ll k) {
     if (k < 0 || k > n) return 0;
     return ((fact[n] * invFact[k]) % MOD * invFact[n - k]) % MOD;
 }
 
-// calculates n permutation r (how many ways we can get r from n accouting for their permutations)
+// (how many ways we can get r from n accouting for their permutations)
 ll nPr(ll n, ll r){
     ll ans = 1;
     for (ll i = (n - r) + 1; i <= n; i++){
@@ -82,9 +74,9 @@ ll sumSequence(ll a, ll b, ll x) {
 ll sumPower(ll a, ll k, int mod) {
     if (k == 1) return a % mod;
     ll half = sumPower(a, k / 2, mod);
-    ll p = half * modExp(a, k / 2, mod) % mod;
+    ll p = half * power(a, k / 2, mod) % mod;
     p = (p + half) % mod;
-    if (k & 1) p = (p + modExp(a, k, mod)) % mod;
+    if (k & 1) p = (p + power(a, k, mod)) % mod;
     return p;
 }
 
