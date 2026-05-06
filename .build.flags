@@ -1,0 +1,1 @@
+-std=c++20 -O2 -pipe -Wall -Wextra -Wshadow -Wconversion -Wformat=2 -Wpedantic -Wcast-qual -Wundef -Wduplicated-cond -Wfloat-equal -Wno-sign-conversion -DLOCAL

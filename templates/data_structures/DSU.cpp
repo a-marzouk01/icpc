@@ -1,44 +1,26 @@
-#include <bits/stdc++.h>
-
+#include <bits/stdc++.h> // Marzouk <3
+#pragma GCC optimize("Ofast")
 using namespace std;
-typedef long long ll;
+typedef int64_t ll;
 
-struct dsu {
-    ll n, forests;
-    vector<ll> sz, parent, rnk;
-
-    dsu(ll nn) {
-        n = nn;
-        forests = nn;
-        sz = rnk = parent = vector<ll>(n+1, 1);
-        iota(parent.begin(), parent.end(), 0);
+struct DSU {
+    int N;
+    vector<int> par, sz;
+    DSU(int n) {
+        N = n;
+        par = sz = vector<int>(N+1, 1);
+        iota(par.begin(), par.end(), 0);
     }
-
-    ll find(ll u) {
-        if (parent[u] == u) return u;
-        return parent[u] = find(parent[u]);
+    int find(int u) {
+        if (par[u] == u) return u;
+        return par[u] = find(par[u]);
     }
-
-    ll same(ll u, ll v) {
-        return find(u) == find(v);
-    }
-
-    void link(ll u, ll v) {
-        parent[v] = u;
+    bool merge(int u, int v) {
+        u = find(u), v = find(v);
+        if (u == v) return 0;
+        if (sz[u] < sz[v]) swap(u, v);
         sz[u] += sz[v];
-
-        if (rnk[u] == rnk[v]) rnk[u]++;
-        forests--;
-    }
-
-    bool merge(ll u, ll v) {
-        u = find(u);
-        v = find(v);
-
-        if (u == v) return false;
-        if (rnk[u] < rnk[v]) swap(u, v);
-        link(u, v);
-
-        return true;
+        par[v] = u;
+        return 1;
     }
 };
